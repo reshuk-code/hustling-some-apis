@@ -1,19 +1,26 @@
-const username = prompt("Enter your GitHub username:");
 const apiUrl = "https://api.github.com/users/";
 const toshowinfo = document.getElementById('show');
+const loadingScreen = document.getElementById('loading');
+const searchBtn = document.getElementById('btn-search');
+const searchInput = document.getElementById('search-here');
+const content = document.getElementById('content');
 
-async function checkUsername() {
+async function checkUsername(username) {
+    toshowinfo.innerHTML = '';  
+    content.classList.add('hidden');  
+    loadingScreen.style.display = "block";  
+
     try {
         const data = await fetch(apiUrl + username);
         if (!data.ok) {
-            throw new Error("User not found"); // Handle non-200 responses
+            throw new Error("User not found");
         }
         const response = await data.json();
         console.log(response);
 
-        // Extract and display specific user info
+        
         toshowinfo.innerHTML = `
-            <img src="${response.avatar_url}" alt="git_avatar" />
+            <a href="${response.avatar_url}" target="_blank"><img src="${response.avatar_url}" alt="git_avatar" /></a>
             <p><strong>Name:</strong> ${response.name || "N/A"}</p>
             <p><strong>Username:</strong> ${response.login}</p>
             <p><strong>Followers:</strong> ${response.followers}</p>
@@ -24,7 +31,28 @@ async function checkUsername() {
     } catch (error) {
         console.error("Error fetching data:", error);
         toshowinfo.innerHTML = `<p>Error: ${error.message}</p>`;
+    } finally {
+        loadingScreen.style.display = "none";  
+        content.classList.remove('hidden');  
     }
 }
 
-checkUsername();
+
+function handleSearch() {
+    const username = searchInput.value.trim();  
+    if (username) {
+        checkUsername(username);  
+    } else {
+        toshowinfo.innerHTML = "<p>Please enter a username.</p>";
+    }
+}
+
+
+searchBtn.addEventListener('click', handleSearch);
+
+
+searchInput.addEventListener('keydown', function (event) {
+    if (event.key === 'Enter') {  
+        handleSearch(); 
+    }
+});

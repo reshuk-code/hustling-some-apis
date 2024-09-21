@@ -1,0 +1,59 @@
+img {
+    width: 20%;
+}
+input {
+    padding:10px 10px 10px ;
+    font-size: 20px;
+    background: #ededed;
+    border: 0;
+    border-radius: 30px;
+}
+input:active{
+    border: 2px #000 solid;
+
+}
+
+button {
+    padding: 10px;
+    border-radius: 30px;
+    margin: 10px;
+    font-size: 20px;
+     border: 2px transparent solid;
+    cursor: pointer;
+}
+button:active{
+    border: 2px #000 solid;
+}
+.spinner {
+    display: none;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    border: 9px solid;
+    border-color: #dbdcef;
+    border-right-color: #4343da;
+    animation: spinner-d3wgkg 1s infinite linear;
+ }
+ 
+ @keyframes spinner-d3wgkg {
+    to {
+       transform: rotate(1turn);
+    }
+ }
+
+
+
+@media only screen and (max-width: 500px) {
+    body {
+      font-size: 5px;
+    }
+    h1{
+        font-size: 20px;
+    }
+    input{
+        font-size: 10px;
+    }
+    button{
+        font-size: 10px;
+    }
+  }

@@ -3,17 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Testing Some API</title>
+    <title>GitHub User Info Search</title>
     <style>
-        img{
+        /* General Styles */
+        img {
             width: 20%;
+        }
+        input {
+            padding: 10px;
+            font-size: 20px;
+            border: 1px #000 solid;
+            outline-offset: 1px;
+        }
+        button {
+            padding: 10px;
+            font-size: 20px;
+            border: 1px #000 solid;
+            outline-offset: 1px;
+            cursor: pointer;
+        }
+
+        /* Hide the main content initially */
+        #content {
+            display: block;
+            text-align: center;
+        }
+
+        /* Spinner CSS */
+        .spinner {
+            display: none; /* Initially hidden */
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            border: 9px solid;
+            border-color: #dbdcef;
+            border-right-color: #4343da;
+            animation: spinner-d3wgkg 1s infinite linear;
+            position: fixed; /* Center the spinner */
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        @keyframes spinner-d3wgkg {
+            to {
+                transform: rotate(1turn);
+            }
+        }
+
+        /* Hide the page content when loading */
+        .hidden {
+            display: none;
         }
     </style>
 </head>
 <body>
-    <h1 id="show"   style="font-family: 'Trebuchet MS';"></h1>
-
-<script src="script.js"></script>
-
+    <div class="spinner" id="loading"></div> 
+    
+    <div id="content"> 
+        <input type="text" placeholder="Search GitHub Username" id="search-here" />  
+        <button id="btn-search">Search</button> 
+        <h1 id="show" style="font-family: 'Trebuchet MS';"></h1>
+    </div>
+    
+    <script src="script.js"></script>
 </body>
 </html>
